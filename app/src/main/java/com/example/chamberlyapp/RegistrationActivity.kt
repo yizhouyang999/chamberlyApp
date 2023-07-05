@@ -76,6 +76,25 @@ class RegistrationActivity : AppCompatActivity() {
                                     Toast.makeText(this, "Failed", Toast.LENGTH_SHORT).show()
                                 }
 
+                            val accountMap = hashMapOf(
+                                "Display_Name" to sDisplayName,
+                                "Email" to sEmail,
+                                "UID" to sUID,
+                                "platform" to "android",
+                                "timestamp" to System.currentTimeMillis().toString()
+                            )
+
+                            db.collection("Accounts")
+                                .document(sUID)
+                                .set(accountMap)
+                                .addOnSuccessListener {
+                                    Toast.makeText(this, "Successfully added", Toast.LENGTH_SHORT)
+                                        .show()
+                                }
+                                .addOnFailureListener {
+                                    Toast.makeText(this, "Failed", Toast.LENGTH_SHORT).show()
+                                }
+
 
                         } else {
                             // display_name already exists, display an error message
